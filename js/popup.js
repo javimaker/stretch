@@ -98,6 +98,8 @@ document.getElementById("loginbtn").onclick = function(){
     chrome.storage.local.set({'id': "012"}, function() {
 		console.log("Set id to 0012");
 	  });
+	document.getElementById("notification").style.display = "block";
+	document.getElementById("loginbtn").style.display = "none";
 };
 document.getElementById("logoutbtn").onclick = function(){
     console.log("Logout button clicked");
@@ -107,6 +109,8 @@ document.getElementById("logoutbtn").onclick = function(){
 	chrome.storage.local.set({'group': null}, function() {
 		console.log("Set group to null");
 	  });
+	document.getElementById("notification").style.display = "none";
+	document.getElementById("loginbtn").style.display = "block";
 };
 
 document.getElementById("notification").onclick = function(){
