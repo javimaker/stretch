@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Stretch Reminder",
-  "version": "0.4.0",
-  "description": "Reminds you to stretch every 30, 60, or 120 minutes with office-friendly, full body stretches.",
+  "name": "MIT STRETCH! Study",
+  "version": "0.5.0",
+  "description": "Reminds you to stretch and administers test surveys",
   "icons": {"16": "logo/Logo_physera_16.png",
            "48": "logo/Logo_physera_48.png",
           "128": "logo/Logo_physera_128.png"
@@ -10,8 +10,8 @@
   "background": {
     "scripts": ["js/background.js"]
   },
-  "homepage_url": "https://guanzgrace.github.io/stretch/",
-  "short_name": "Stretch",
+  "homepage_url": "https://javimaker.github.io/stretch-mit/",
+  "short_name": "MITStretch",
   "permissions" : [
   	"tabs",
   	"storage",
@@ -19,7 +19,7 @@
     "https://physera.com/"
   ],
   "browser_action": {
-        "default_title": "Stretch Reminder",
+        "default_title": "MIT STRETCH! Study",
         "default_popup": "popup.html"
     }
 }
