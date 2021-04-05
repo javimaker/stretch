@@ -24,6 +24,16 @@ function openNotification() {
     });
 }
 
+// opens the login page in a new browser tab.
+function openlogin() {
+    var popupUrl = chrome.runtime.getURL('/login.html');
+    chrome.tabs.query({url:popupUrl}, function(tabs){
+        if(tabs.length > 0){ chrome.tabs.remove(tabs[0].id); }
+        chrome.windows.create({ url: 'login.html', type: "popup",
+                             width: 700, height: 500, top: 20, left: 20 });
+    });
+}
+
 // recreates the alarm either by default or by storage, if they exist
 function recreateAlarm() {
     // account for null
