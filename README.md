@@ -4,7 +4,8 @@
 - Stretch is a Google Chrome extension for use as part of the MIT STRETCH study on Zoom fatigue.
 
 #### Stretch Progress
-- v1 Initial UI fixes
+- 0.5 Initial UI fixes
+- 0.6 Added login, more UI fixes
 
 #### Credits
 - Shreya Pandit

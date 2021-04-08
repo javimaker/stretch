@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "MIT STRETCH! Study",
-  "version": "0.5.0",
-  "description": "Reminds you to stretch and administers test surveys",
+  "name": "MIT STRETCH Study",
+  "version": "0.6.0",
+  "description": "Companion extension for the MIT STRETCH study",
   "icons": {"16": "logo/Logo_physera_16.png",
            "48": "logo/Logo_physera_48.png",
           "128": "logo/Logo_physera_128.png"
@@ -10,8 +10,8 @@
   "background": {
     "scripts": ["js/background.js"]
   },
-  "homepage_url": "https://javimaker.github.io/stretch-mit/",
-  "short_name": "MITStretch",
+  "homepage_url": "https://www.mit.edu",
+  "short_name": "Stretch-MIT",
   "permissions" : [
   	"tabs",
   	"storage",

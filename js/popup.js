@@ -100,6 +100,15 @@ document.getElementById("loginbtn").onclick = function(){
 	  });
 	document.getElementById("notification").style.display = "block";
 	document.getElementById("loginbtn").style.display = "none";
+	console.log("Calling openNotification in background.js.");
+	//Opens login pahe
+    var popupUrl = chrome.runtime.getURL('/login.html');
+    chrome.tabs.query({url:popupUrl}, function(tabs){
+    	window.close();
+        if(tabs.length > 0){ chrome.tabs.remove(tabs[0].id); }
+        chrome.windows.create({ url: 'login.html', type: "popup",
+        					 width: 700, height: 500, top: 20, left: 20 });
+    });
 };
 document.getElementById("logoutbtn").onclick = function(){
     console.log("Logout button clicked");

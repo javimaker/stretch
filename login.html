@@ -1,0 +1,26 @@
+<html> <head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/login.css">
+</head> <body>
+<div class="jumbotron text-center">
+  <h2>Login</h2> <p>Please login with the credentials you received after being accepted into the study. </p>  
+</div>
+<div class="container"> <div class="row"> 
+    <form action="" name="login">
+        <label for="pid">Participant ID</label>
+        <input type="text" name="pid" id="pid" placeholder="Ex: 20210689"/>   
+        <label for="password">Supplied Password</label>
+        <input type="password" name="password" id="password" placeholder="Ex: hdkGK72hs78s"/>   
+        <button type="submit">Login</button>   
+      </form>
+</div>
+<span id="error"></span>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/fontawesome.js"></script>
+<script src="js/login.js"></script>
+</body> </html>
