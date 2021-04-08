@@ -37,18 +37,25 @@ $(function() {
     $("form[name='login']").submit(function (event) {
         var formData = {
           pid: $("#pid").val(),
-          password: $("#password").val(),
+          password: $("#password").val(),         
         };
-    
         $.ajax({
           type: "POST",
           url: "process.php",
           data: formData,
           dataType: "json",
           encode: true,
+          error: function(){
+            alert("Error: cannot connect to the server");
+            //var errorspan = document.getElementById('error');
+            //errorspan.innerHTML = "Error";
+          },
+          success: function(data) {
+            alert(data);
+          }
         }).done(function (data) {
           console.log(data);
-          $('#error').html("This is an error");
+          alert("Done executing");
         });
     
         event.preventDefault();
