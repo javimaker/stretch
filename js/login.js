@@ -37,11 +37,11 @@ $(function() {
     $("form[name='login']").submit(function (event) {
         var formData = {
           pid: $("#pid").val(),
-          password: $("#password").val(),         
+          pwd: $("#password").val(),         
         };
         $.ajax({
           type: "POST",
-          url: "process.php",
+          url: "https://us-east1-onyx-logic-308404.cloudfunctions.net/participantInfo",
           data: formData,
           dataType: "json",
           encode: true,
