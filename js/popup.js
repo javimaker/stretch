@@ -6,7 +6,8 @@ chrome.storage.local.get(['enabled', 'freq', 'type', 'id'], function(option) {
     } 
     else {  document.getElementById("checkbox1").checked = true; }
 
-    if (option.freq != null) { // what's the frequency? 30, 60, or 120
+    /*FREQUENCY DISABLED
+	if (option.freq != null) { // what's the frequency? 30, 60, or 120
 		if (parseInt(option.freq) == 30) {
 			document.getElementById("frequency").firstChild.data = "Every 30 Minutes";
 		} else if (parseInt(option.freq) == 60) { // freq is every 1 hour
@@ -16,7 +17,7 @@ chrome.storage.local.get(['enabled', 'freq', 'type', 'id'], function(option) {
 		}
     } else { // first initialization
     	document.getElementById("frequency").firstChild.data = "Every 30 Minutes";
-    }
+    }*/
 
     if (option.type != null) { // type: currently supported elbow/wrist, lowerback/core, knee
 		if (option.type == "upperbody") {
@@ -52,6 +53,7 @@ document.getElementById("checkbox1").onclick = function(){
 	}
 };
 
+/* FREQUENCY IS DISABLED
 document.getElementById("frequency").onclick = function(){
 	// currently is 2 hours, set to be every 30 min
 	if(document.getElementById("frequency").firstChild.data == "Every 2 Hours") {
@@ -72,6 +74,7 @@ document.getElementById("frequency").onclick = function(){
 		document.getElementById("frequency").firstChild.data = "Every 2 Hours";
 	}
 };
+*/
 
 document.getElementById("type").onclick = function(){
 	// currently upper body, set to lower body
