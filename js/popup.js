@@ -34,7 +34,7 @@ chrome.storage.local.get(['enabled', 'freq', 'type', 'id'], function(option) {
 			document.getElementById("notification").style.display = "block";
 			document.getElementById("loginbtn").style.display = "none";
 		} 
-    } else { // first initialization
+    } else { // first initialization or logged out
 		document.getElementById("notification").style.display = "none";
 		document.getElementById("loginbtn").style.display = "block";
     }
@@ -98,6 +98,9 @@ document.getElementById("loginbtn").onclick = function(){
     chrome.storage.local.set({'id': "012"}, function() {
 		console.log("Set id to 0012");
 	  });
+	chrome.storage.local.set({'group': 3}, function() {
+		console.log("Set group to 3");
+	});
 	document.getElementById("notification").style.display = "block";
 	document.getElementById("loginbtn").style.display = "none";
 	console.log("Calling openNotification in background.js.");
