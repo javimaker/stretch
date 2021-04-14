@@ -45,8 +45,9 @@ $(function() {
           data: formData,
           dataType: "json",
           encode: true,
-          error: function(){
+          error: function(error){
             alert("Error: cannot connect to the server");
+            alert(error)
             //var errorspan = document.getElementById('error');
             //errorspan.innerHTML = "Error";
           },
