@@ -99,7 +99,15 @@ function displayExercise(selectedExercise) {
     displayName.innerHTML = selectedExercise.display_name;
     document.getElementById('content').append(displayName);
 
-    var rc = selectedExercise.reps;
+    //The following code displays a generic message in lieu of rep times
+    var repetitions = document.createElement('p');
+    var repString = "<i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ";
+    repString += "Remember to stretch for at least 30 sec per exercise and 90 sec in total.";
+    repetitions.innerHTML = repString;
+    document.getElementById('content').append(repetitions);   
+
+    // The following code displays recommended repetitions
+    /*var rc = selectedExercise.reps;
     var rt = selectedExercise.rep_time;
     if (rc != null & rt != null) {
         var repetitions = document.createElement('p');
@@ -109,7 +117,7 @@ function displayExercise(selectedExercise) {
         else if (rc = 1) { repString += " repetition for " + rt + " seconds."; }
         repetitions.innerHTML = repString;
         document.getElementById('content').append(repetitions);
-    }
+    }*/
 
     var br = document.createElement('br');
     document.getElementById('content').appendChild(br);
@@ -125,12 +133,25 @@ function displayExercise(selectedExercise) {
         instruction.innerHTML = index + '. ' + inst[i].text;
         document.getElementById('content').append(instruction);
     }
-
-    var imageURL = selectedExercise.images[0].urls.original;
-    var image = document.createElement('img');
-    image.src = imageURL;
-    image.setAttribute("class", "img-responsive");
-    image.setAttribute("max-width", "100%");
-    image.setAttribute("height", "auto");
-    document.getElementById('image').append(image);
+    // Display video if group 3, image otherwise
+    chrome.storage.local.get(['group'], function(result) {
+        if (result.group == 3){
+            var video = document.createElement('video');
+            video.src = "/videos/quad_stretch.mp4";
+            video.setAttribute("controls", "true");
+            video.setAttribute("loop", "True");
+            video.setAttribute("muted", "True");
+            video.setAttribute("autoplay", "True");
+            video.setAttribute("width", "100%");
+            document.getElementById('image').append(video);       
+        } else {
+            var imageURL = selectedExercise.images[0].urls.original;
+            var image = document.createElement('img');
+            image.src = imageURL;
+            image.setAttribute("class", "img-responsive");
+            image.setAttribute("max-width", "100%");
+            image.setAttribute("height", "auto");
+            document.getElementById('image').append(image);
+      }
+    });
 }
