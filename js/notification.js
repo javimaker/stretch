@@ -13,6 +13,94 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
             queryAllAPIs(grabAndDisplayExercise); 
         } else {
             grabAndDisplayExercise();
+
+            document.getElementById("new-exercise").onclick = function() {
+            	document.location.reload(true);
+            };
+
+            document.getElementById("poll-btn-1").onclick = function(){
+	  						console.log("Poll 1 button clicked");
+	  						var btnData = {
+				          poll1: "1",
+				          poll2: "0",
+				          poll3: "0",         
+				        };
+				        console.log(btnData);
+				        $.ajax({
+				          type: "POST",
+				          url: "process.php",
+				          data: btnData,
+				          dataType: "json",
+				          encode: true,
+				          error: function(){
+				            alert("Error: cannot connect to the server");
+				          },
+				          success: function(data) {
+				            alert(data);
+				          }
+				        }).done(function (data) {
+				          console.log(data);
+				          alert("Done executing");
+				        });
+				    
+				        event.preventDefault();
+        		};
+
+        		document.getElementById("poll-btn-2").onclick = function(){
+    						console.log("Poll 2 button clicked");
+    						var btnData = {
+				          poll1: "0",
+				          poll2: "1",
+				          poll3: "0",         
+				        };
+				        console.log(btnData);
+				        $.ajax({
+				          type: "POST",
+				          url: "process.php",
+				          data: btnData,
+				          dataType: "json",
+				          encode: true,
+				          error: function(){
+				            alert("Error: cannot connect to the server");
+				          },
+				          success: function(data) {
+				            alert(data);
+				          }
+				        }).done(function (data) {
+				          console.log(data);
+				          alert("Done executing");
+				        });
+				    
+				        event.preventDefault();
+        		};
+
+        		document.getElementById("poll-btn-3").onclick = function(){
+    						console.log("Poll 3 button clicked");
+    						var btnData = {
+				          poll1: "0",
+				          poll2: "1",
+				          poll3: "0",         
+				        };
+				        console.log(btnData);
+				        $.ajax({
+				          type: "POST",
+				          url: "process.php",
+				          data: btnData,
+				          dataType: "json",
+				          encode: true,
+				          error: function(){
+				            alert("Error: cannot connect to the server");
+				          },
+				          success: function(data) {
+				            alert(data);
+				          }
+				        }).done(function (data) {
+				          console.log(data);
+				          alert("Done executing");
+				        });
+				    
+				        event.preventDefault();	
+        		};
         }
     }
 });
