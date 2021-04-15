@@ -14,22 +14,25 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
         } else {
             grabAndDisplayExercise();
 
+            //get time for logging
+            var dateTime = new Date().toLocaleString();
+
+            //load new exercise
             document.getElementById("new-exercise").onclick = function() {
             	document.location.reload(true);
             };
 
+            //poll buttons
             document.getElementById("poll-btn-1").onclick = function(){
-	  						console.log("Poll 1 button clicked");
-	  						var btnData = {
+	  					var pollData = {
 				          poll1: "1",
-				          poll2: "0",
-				          poll3: "0",         
+				          time: dateTime,      
 				        };
-				        console.log(btnData);
+				        console.log(JSON.stringify(pollData));
 				        $.ajax({
 				          type: "POST",
 				          url: "process.php",
-				          data: btnData,
+				          data: pollData,
 				          dataType: "json",
 				          encode: true,
 				          error: function(){
@@ -47,17 +50,15 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
         		};
 
         		document.getElementById("poll-btn-2").onclick = function(){
-    						console.log("Poll 2 button clicked");
-    						var btnData = {
-				          poll1: "0",
+						var pollData = {
 				          poll2: "1",
-				          poll3: "0",         
+				          time: dateTime,      
 				        };
-				        console.log(btnData);
+				        console.log(JSON.stringify(pollData));
 				        $.ajax({
 				          type: "POST",
 				          url: "process.php",
-				          data: btnData,
+				          data: pollData,
 				          dataType: "json",
 				          encode: true,
 				          error: function(){
@@ -75,17 +76,15 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
         		};
 
         		document.getElementById("poll-btn-3").onclick = function(){
-    						console.log("Poll 3 button clicked");
-    						var btnData = {
-				          poll1: "0",
-				          poll2: "1",
-				          poll3: "0",         
+						var pollData = {
+				          poll3: "1",
+				          time: dateTime,      
 				        };
-				        console.log(btnData);
+				        console.log(JSON.stringify(pollData));
 				        $.ajax({
 				          type: "POST",
 				          url: "process.php",
-				          data: btnData,
+				          data: pollData,
 				          dataType: "json",
 				          encode: true,
 				          error: function(){
