@@ -3,6 +3,7 @@ recreateAlarm();
 
 // opens the notifications tab every 30m/1h/2h at xx:30 and xx:00. xx is odd for every 2h.
 // clears the past alarmStart and creates a new one.
+// in MIT-STRETCH, frequency should be every minute
 function createAlarm(freq) {
     var now = new Date();
     var day = now.getDate();
@@ -13,6 +14,7 @@ function createAlarm(freq) {
         when: timestamp, periodInMinutes: freq
     });
 }
+
 
 // opens the notification in a new browser tab.
 function openNotification() {
@@ -35,14 +37,22 @@ function openlogin() {
 }
 
 // recreates the alarm either by default or by storage, if they exist
-function recreateAlarm() {
+// DEPRECATED IN MIT-STRETCH. Re-implemented below.
+/*function recreateAlarm() {
     // account for null
     chrome.storage.local.get('freq', function(options) {
         if(options.freq != null) { createAlarm(parseInt(options.freq)); } 
-        else { createAlarm(30); }
+        else {
+            createAlarm(30);
+        }
+    });
+}*/
+function recreateAlarm() {
+    // account for group needing to be 2 or 3
+    chrome.storage.local.get('group', function(options) {
+        if(options.group >= 2) { createAlarm(1); } 
     });
 }
-
 // listen for time and open the notification if it meets correct conditions
 chrome.alarms.onAlarm.addListener(function(alarm) {
     chrome.storage.local.get('enabled', function(option) {
