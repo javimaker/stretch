@@ -3,9 +3,9 @@
   "name": "MIT STRETCH Study",
   "version": "0.6.0",
   "description": "Companion extension for the MIT STRETCH study",
-  "icons": {"16": "logo/Logo_physera_16.png",
-           "48": "logo/Logo_physera_48.png",
-          "128": "logo/Logo_physera_128.png"
+  "icons": {"16": "logo/logo_16.png",
+           "48": "logo/logo_48.png",
+          "128": "logo/logo_128.png"
         },
   "background": {
     "scripts": ["js/background.js"]
