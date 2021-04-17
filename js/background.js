@@ -48,9 +48,9 @@ function openlogin() {
     });
 }*/
 function recreateAlarm() {
-    // account for group needing to be 2 or 3
+    // If the group is set, generate the alarm
     chrome.storage.local.get('group', function(options) {
-        if(options.group >= 2) { createAlarm(1); } 
+        if(options.group >= 1) { createAlarm(1); } 
     });
 }
 // listen for time and open the notification if it meets correct conditions
