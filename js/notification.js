@@ -226,15 +226,16 @@ function displayExercise(selectedExercise) {
 
             // Display video if group 3, image if group 2
             if (result.group == 3){
+                var exercise_id = selectedExercise.id;
                 var video = document.createElement('video');
-                video.src = "/videos/quad_stretch.mp4";
+                video.src = "/videos/" + exercise_id + ".mp4";
                 video.setAttribute("controls", "true");
                 video.setAttribute("loop", "True");
                 video.setAttribute("muted", "True");
                 video.setAttribute("autoplay", "True");
                 video.setAttribute("width", "100%");
                 document.getElementById('image').append(video);       
-            } else if (result.group == 2){
+            } else {
                 var imageURL = selectedExercise.images[0].urls.original;
                 var image = document.createElement('img');
                 image.src = imageURL;
@@ -242,7 +243,7 @@ function displayExercise(selectedExercise) {
                 image.setAttribute("max-width", "100%");
                 image.setAttribute("height", "auto");
                 document.getElementById('image').append(image);
-                }
+          }
         } else { //If I am group 1 (or null), I don't get any exercise and the refresh button is hidden
             document.getElementById("new-exercise").style.display = "none";
         }
