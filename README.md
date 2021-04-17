@@ -6,6 +6,7 @@
 #### Stretch Progress
 - 0.5 Initial UI fixes
 - 0.6 Added login, more UI fixes
+- 0.7 Added video display feature
 
 #### Credits
 - Shreya Pandit
