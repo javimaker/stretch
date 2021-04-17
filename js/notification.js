@@ -223,8 +223,9 @@ function displayExercise(selectedExercise) {
     // Display video if group 3, image otherwise
     chrome.storage.local.get(['group'], function(result) {
         if (result.group == 3){
+            var exercise_id = selectedExercise.id;
             var video = document.createElement('video');
-            video.src = "/videos/quad_stretch.mp4";
+            video.src = "/videos/" + exercise_id + ".mp4";
             video.setAttribute("controls", "true");
             video.setAttribute("loop", "True");
             video.setAttribute("muted", "True");
