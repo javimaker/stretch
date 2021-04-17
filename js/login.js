@@ -52,13 +52,13 @@ $(function() {
             //errorspan.innerHTML = "Error";
           },
           success: function(data) {
-            alert(data);
+            alert("Successfully logged in!");
           }
         }).done(function (data) {
-          console.log(data);
           alert("Done executing");
         });
-    
+              
         event.preventDefault();
+        open(location, '_self').close();
       });
   });

@@ -28,7 +28,7 @@ chrome.storage.local.get(['enabled', 'freq', 'type', 'id'], function(option) {
 			document.getElementById("type").firstChild.data = "Full Body";
 		} 
     } else { // first initialization
-    	document.getElementById("type").firstChild.data = "Upper Body";
+    	document.getElementById("type").firstChild.data = "Full Body";
     }
 	if (option.id != null) { // id is set when logged in, null otherwise
 		if (option.type != null) {
