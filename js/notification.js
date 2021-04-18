@@ -273,7 +273,8 @@ function displayExercise(selectedExercise) {
                 video.setAttribute("loop", "True");
                 video.setAttribute("muted", "True");
                 video.setAttribute("autoplay", "True");
-                video.setAttribute("width", "100%");
+                //video.setAttribute("width", "100%");
+                video.setAttribute("height","360")
                 document.getElementById('image').append(video);       
             } else {
                 var imageURL = selectedExercise.images[0].urls.original;

@@ -10,11 +10,11 @@ $(function() {
         // on the right side
         pid: {
           required: true,
-          minlength: 6
+          minlength: 5
         },
         password: {
           required: true,
-          minlength: 6
+          minlength: 5
         }
       },
       // Specify validation error messages
