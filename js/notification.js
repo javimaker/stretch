@@ -111,35 +111,6 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
 				        event.preventDefault();
                         open(location, '_self').close();	
         		};
-
-
-            document.getElementById("poll-btn-4").onclick = function(){
-                        var pollData = {
-                          pid: id,
-                          time: dateTime,
-                          poll_answer: 4, 
-                        };
-                        console.log(JSON.stringify(pollData));
-                        $.ajax({
-                          type: "POST",
-                          url: 'https://us-east1-onyx-logic-308404.cloudfunctions.net/flashPoll',
-                          data: pollData,
-                          dataType: "json",
-                          encode: true,
-                          error: function(){
-                            alert("Error: cannot connect to the server");
-                          },
-                          success: function(data) {
-                            alert(data);
-                          }
-                        }).done(function (data) {
-                          console.log(data);
-                          alert("Done executing");
-                        });
-                    
-                        event.preventDefault(); 
-                        open(location, '_self').close();
-                };
         }
     }
 });
