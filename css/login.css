@@ -7,7 +7,7 @@ h1 { font-size: 30px; line-height: 64px; }
 h2 { font-size: 26px; }
 .footer { position: absolute; bottom: 0; width: 100%; height: 60px; padding-top: 20px; background-color: #f6f7f9;}
 .bigger { font-size: 20px; line-height: 44px; }
-.jumbotron { background-image: linear-gradient(to top, #fdc284, #f2783c); color: #ffffff; }
+.jumbotron { background-image: linear-gradient(to top, #fdc284, #f2783c); color: #ffffff; padding-top: 20px !important; padding-bottom: 20px !important; padding-left: 50px; padding-right: 50px;}
 .inline-button-1 { padding: 0px; text-decoration: none; color: #fff; line-height: 16px; }
 .inline-button-2 { padding: 0px; text-decoration: none; color: #666; line-height: 16px; }
 .inline-button-1:hover { padding: 0px; text-decoration: none; color: #666; line-height: 16px; }

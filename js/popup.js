@@ -28,7 +28,7 @@ chrome.storage.local.get(['enabled', 'freq', 'type', 'pid'], function(option) {
 			document.getElementById("type").firstChild.data = "Full Body";
 		} 
     } else { // first initialization
-    	document.getElementById("type").firstChild.data = "Upper Body";
+    	document.getElementById("type").firstChild.data = "Full Body";
     }
 	if (option.pid != null) { // id is set when logged in, null otherwise		
 			document.getElementById("notification").style.display = "block";
@@ -134,7 +134,7 @@ document.getElementById("notification").onclick = function(){
     	window.close();
         if(tabs.length > 0){ chrome.tabs.remove(tabs[0].id); }
         chrome.windows.create({ url: 'notification.html', type: "popup",
-        					 width: 1150, height: 720, top: 20, left: 20 });
+        					 width: 1150, height: 820, top: 20, left: 20 });
     });
 };
 

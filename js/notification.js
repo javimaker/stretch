@@ -21,6 +21,7 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
                 id = result.pid;
                 console.log("ID:", id)
             });   
+          
             //load new exercise
             document.getElementById("new-exercise").onclick = function() {
             	document.location.reload(true);
@@ -217,63 +218,71 @@ function pickRandomExercise(exercises){
 
 // javascript to append to the html page to display an exercise, precondition it is valid
 function displayExercise(selectedExercise) {
-    var displayName = document.createElement('h2');
-    displayName.innerHTML = selectedExercise.display_name;
-    document.getElementById('content').append(displayName);
-
-    //The following code displays a generic message in lieu of rep times
-    var repetitions = document.createElement('p');
-    var repString = "<i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ";
-    repString += "Remember to stretch for at least 30 sec per exercise and 90 sec in total.";
-    repetitions.innerHTML = repString;
-    document.getElementById('content').append(repetitions);   
-
-    // The following code displays recommended repetitions
-    /*var rc = selectedExercise.reps;
-    var rt = selectedExercise.rep_time;
-    if (rc != null & rt != null) {
-        var repetitions = document.createElement('p');
-        var repString = "<i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ";
-        repString += rc;
-        if (rc > 1) { repString += " repetitions, one every " + rt + " seconds."; }
-        else if (rc = 1) { repString += " repetition for " + rt + " seconds."; }
-        repetitions.innerHTML = repString;
-        document.getElementById('content').append(repetitions);
-    }*/
-
-    var br = document.createElement('br');
-    document.getElementById('content').appendChild(br);
-    
-    var inst = selectedExercise.instructions;
-    var instructions = document.createElement('h4');
-    instructions.className = "limitWidth";
-    instructions.innerHTML = "Instructions: \n";
-    document.getElementById('content').append(instructions);
-    for (i in inst) {
-        var instruction = document.createElement('p');
-        var index = Number(i) + 1;
-        instruction.innerHTML = index + '. ' + inst[i].text;
-        document.getElementById('content').append(instruction);
-    }
-    // Display video if group 3, image otherwise
     chrome.storage.local.get(['group'], function(result) {
-        if (result.group == 3){
-            var video = document.createElement('video');
-            video.src = "/videos/quad_stretch.mp4";
-            video.setAttribute("controls", "true");
-            video.setAttribute("loop", "True");
-            video.setAttribute("muted", "True");
-            video.setAttribute("autoplay", "True");
-            video.setAttribute("width", "100%");
-            document.getElementById('image').append(video);       
-        } else {
-            var imageURL = selectedExercise.images[0].urls.original;
-            var image = document.createElement('img');
-            image.src = imageURL;
-            image.setAttribute("class", "img-responsive");
-            image.setAttribute("max-width", "100%");
-            image.setAttribute("height", "auto");
-            document.getElementById('image').append(image);
-      }
+        //Displays an exercise ONLY if group 2 or 3
+        if(result.group >=2){
+            var displayName = document.createElement('h2');
+            displayName.innerHTML = selectedExercise.display_name;
+            document.getElementById('content').append(displayName);
+
+            //The following code displays a generic message in lieu of rep times
+            var repetitions = document.createElement('p');
+            var repString = "<i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ";
+            repString += "Remember to stretch for at least 30 sec per exercise and 90 sec in total.";
+            repetitions.innerHTML = repString;
+            document.getElementById('content').append(repetitions);   
+
+            // The following code displays recommended repetitions
+            /*var rc = selectedExercise.reps;
+            var rt = selectedExercise.rep_time;
+            if (rc != null & rt != null) {
+                var repetitions = document.createElement('p');
+                var repString = "<i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> ";
+                repString += rc;
+                if (rc > 1) { repString += " repetitions, one every " + rt + " seconds."; }
+                else if (rc = 1) { repString += " repetition for " + rt + " seconds."; }
+                repetitions.innerHTML = repString;
+                document.getElementById('content').append(repetitions);
+            }*/
+
+            var br = document.createElement('br');
+            document.getElementById('content').appendChild(br);
+            
+            var inst = selectedExercise.instructions;
+            var instructions = document.createElement('h4');
+            instructions.className = "limitWidth";
+            instructions.innerHTML = "Instructions: \n";
+            document.getElementById('content').append(instructions);
+            for (i in inst) {
+                var instruction = document.createElement('p');
+                var index = Number(i) + 1;
+                instruction.innerHTML = index + '. ' + inst[i].text;
+                document.getElementById('content').append(instruction);
+            }
+
+            // Display video if group 3, image if group 2
+            if (result.group == 3){
+                var exercise_id = selectedExercise.id;
+                var video = document.createElement('video');
+                video.src = "/videos/" + exercise_id + ".mp4";
+                video.setAttribute("controls", "true");
+                video.setAttribute("loop", "True");
+                video.setAttribute("muted", "True");
+                video.setAttribute("autoplay", "True");
+                //video.setAttribute("width", "100%");
+                video.setAttribute("height","360")
+                document.getElementById('image').append(video);       
+            } else {
+                var imageURL = selectedExercise.images[0].urls.original;
+                var image = document.createElement('img');
+                image.src = imageURL;
+                image.setAttribute("class", "img-responsive");
+                image.setAttribute("max-width", "100%");
+                image.setAttribute("height", "auto");
+                document.getElementById('image').append(image);
+          }
+        } else { //If I am group 1 (or null), I don't get any exercise and the refresh button is hidden
+            document.getElementById("new-exercise").style.display = "none";
+        }
     });
 }

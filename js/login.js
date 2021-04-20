@@ -10,11 +10,11 @@ $(function() {
         // on the right side
         pid: {
           required: true,
-          minlength: 6
+          minlength: 5
         },
         password: {
           required: true,
-          minlength: 6
+          minlength: 5
         }
       },
       // Specify validation error messages
@@ -53,15 +53,13 @@ $(function() {
             //errorspan.innerHTML = "Error";
           },
           success: function(data) {
-            alert(data);
+            alert("Successfully logged in!");
           }
         }).done(function (data) {
-          console.log(data);
           alert("Done executing");
         });
-        */
+
         //alert(JSON.stringify(formData));
-        /*
         var url = "https://us-east1-onyx-logic-308404.cloudfunctions.net/flashPoll";
 
         var xhr = new XMLHttpRequest();
@@ -82,5 +80,9 @@ $(function() {
         
         xhr.send(data);
         */
+              
+        event.preventDefault();
+        open(location, '_self').close();
+      });
   });
 })
