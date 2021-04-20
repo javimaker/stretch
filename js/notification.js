@@ -21,7 +21,6 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
                 id = result.pid;
                 console.log("ID:", id)
             });   
-          
             //load new exercise
             document.getElementById("new-exercise").onclick = function() {
             	document.location.reload(true);
@@ -52,16 +51,13 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
               xhr.send(JSON.stringify(pollData));
               event.preventDefault(); 
               open(location, '_self').close();
-		    
-		          event.preventDefault();
-              open(location, '_self').close();
-        		};
+        	};
 
-        		document.getElementById("poll-btn-2").onclick = function(){
-              var pollData = {
-                pid: id,
-                date_time: dateTime,
-                poll_answer: 2, 
+        	document.getElementById("poll-btn-2").onclick = function(){
+                var pollData = {
+                    pid: id,
+                    date_time: dateTime,
+                    poll_answer: 2, 
               };
               console.log(JSON.stringify(pollData));
 
