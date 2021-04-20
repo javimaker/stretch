@@ -13,127 +13,30 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
             queryAllAPIs(grabAndDisplayExercise); 
         } else {
             grabAndDisplayExercise();
-
-            //get values for logging
-            var dateTime = new Date().toLocaleString();
-            var id;
-            chrome.storage.local.get(['pid'], function(result) {
-                id = result.pid;
-                console.log("ID:", id)
-            });   
-            //load new exercise
-            document.getElementById("new-exercise").onclick = function() {
-            	document.location.reload(true);
-            };
-
-            //poll buttons
-            document.getElementById("poll-btn-1").onclick = function(){				            
-              var pollData = {
-                pid: id,
-                date_time: dateTime,
-                poll_answer: 1, 
-              };
-              console.log(JSON.stringify(pollData));
-
-              var url = "https://us-east1-onyx-logic-308404.cloudfunctions.net/flashPoll";
-
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", url);
-                
-              xhr.setRequestHeader("Content-Type", "application/json");
-                
-              xhr.onreadystatechange = function () {
-                  if (xhr.readyState === 4) {
-                    console.log(xhr.status);
-                    console.log(xhr.responseText);
-                  }};
-                
-              xhr.send(JSON.stringify(pollData));
-              event.preventDefault(); 
-              open(location, '_self').close();
-        	};
-
-        	document.getElementById("poll-btn-2").onclick = function(){
-                var pollData = {
-                    pid: id,
-                    date_time: dateTime,
-                    poll_answer: 2, 
-              };
-              console.log(JSON.stringify(pollData));
-
-              var url = "https://us-east1-onyx-logic-308404.cloudfunctions.net/flashPoll";
-
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", url);
-                
-              xhr.setRequestHeader("Content-Type", "application/json");
-                
-              xhr.onreadystatechange = function () {
-                  if (xhr.readyState === 4) {
-                    console.log(xhr.status);
-                    console.log(xhr.responseText);
-                  }};
-                
-              xhr.send(JSON.stringify(pollData));
-
-				      event.preventDefault();
-              open(location, '_self').close();
-        		};
-
-        		document.getElementById("poll-btn-3").onclick = function(){
-              var pollData = {
-                pid: id,
-                date_time: dateTime,
-                poll_answer: 3, 
-              };
-              console.log(JSON.stringify(pollData));
-
-              var url = "https://us-east1-onyx-logic-308404.cloudfunctions.net/flashPoll";
-
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", url);
-                
-              xhr.setRequestHeader("Content-Type", "application/json");
-                
-              xhr.onreadystatechange = function () {
-                  if (xhr.readyState === 4) {
-                    console.log(xhr.status);
-                    console.log(xhr.responseText);
-                  }};
-                
-              xhr.send(JSON.stringify(pollData));
-              event.preventDefault(); 
-              open(location, '_self').close();	
-        		};
-
-
-            document.getElementById("poll-btn-4").onclick = function(){
-                      var pollData = {
-                        pid: id,
-                        date_time: dateTime,
-                        poll_answer: 4, 
-                      };
-                      console.log(JSON.stringify(pollData));
-
-                      var url = "https://us-east1-onyx-logic-308404.cloudfunctions.net/flashPoll";
-
-                      var xhr = new XMLHttpRequest();
-                      xhr.open("POST", url);
-                        
-                      xhr.setRequestHeader("Content-Type", "application/json");
-                        
-                      xhr.onreadystatechange = function () {
-                          if (xhr.readyState === 4) {
-                            console.log(xhr.status);
-                            console.log(xhr.responseText);
-                          }};
-                        
-                      xhr.send(JSON.stringify(pollData));
-                      event.preventDefault(); 
-                      open(location, '_self').close();
-                };
+  
         }
     }
+    
+    //new exercise button
+     document.getElementById("new-exercise").onclick = function() {
+        document.location.reload(true);
+    };
+    //poll buttons
+    document.getElementById("poll-btn-1").onclick = function(){				            
+        sendPoll(1);
+        event.preventDefault(); 
+        //open(location, '_self').close();
+    };
+    document.getElementById("poll-btn-2").onclick = function(){
+        sendPoll(2);
+        event.preventDefault(); 
+        //open(location, '_self').close();
+        };
+    document.getElementById("poll-btn-3").onclick = function(){
+        sendPoll(3);
+        event.preventDefault(); 
+        //open(location, '_self').close();	
+        };
 });
 
 function queryAllAPIs(callback) {
@@ -281,4 +184,48 @@ function displayExercise(selectedExercise) {
             document.getElementById("new-exercise").style.display = "none";
         }
     });
+}
+
+function sendPoll(pollchoice){
+    chrome.storage.local.get(['pid'], function(result) {
+        var id = result.pid;
+        //If PID is null, go to login
+        if (result.pid == null){
+            console.log("ID is null. Must log in first");
+            alert("ID is null. Must log in first");
+            var popupUrl = chrome.runtime.getURL('/login.html');
+            chrome.tabs.query({url:popupUrl}, function(tabs){
+                window.close();
+                if(tabs.length > 0){ chrome.tabs.remove(tabs[0].id); }
+                chrome.windows.create({ url: 'login.html', type: "popup",
+                                     width: 700, height: 500, top: 20, left: 20 });
+            });
+        } else {
+            //Get datetime values for logging
+            var dateTime = new Date().toLocaleString();
+
+            //Prepare payload
+            console.log("Sending flashpoll with ID:", id);
+            var pollData = {
+                pid: id,
+                date_time: dateTime,
+                poll_answer: pollchoice, 
+            };
+            console.log(JSON.stringify(pollData));
+            //POST request
+            var url = "https://us-east1-onyx-logic-308404.cloudfunctions.net/flashPoll";
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url);
+            
+            xhr.setRequestHeader("Content-Type", "application/json");
+            
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    open(location, '_self').close();
+                };
+            };           
+            xhr.send(JSON.stringify(pollData));
+        }
+    });  
 }

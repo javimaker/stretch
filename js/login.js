@@ -84,5 +84,4 @@ $(function() {
         event.preventDefault();
         open(location, '_self').close();
       });
-  });
 })

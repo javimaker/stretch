@@ -106,7 +106,7 @@ document.getElementById("loginbtn").onclick = function(){
 	document.getElementById("notification").style.display = "block";
 	document.getElementById("loginbtn").style.display = "none";
 	console.log("Calling openNotification in background.js.");
-	//Opens login pahe
+	//Opens login page
     var popupUrl = chrome.runtime.getURL('/login.html');
     chrome.tabs.query({url:popupUrl}, function(tabs){
     	window.close();
