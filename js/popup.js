@@ -1,5 +1,5 @@
 // popup javascript
-chrome.storage.local.get(['enabled', 'freq', 'type', 'id'], function(option) {
+chrome.storage.local.get(['enabled', 'freq', 'type', 'pid'], function(option) {
     if (option.enabled != null) { // enabled or disabled; for first initialization, enable
 		if (! option.enabled) { document.getElementById("checkbox1").checked = false; } 
 		else { document.getElementById("checkbox1").checked = true; }  	
@@ -30,11 +30,10 @@ chrome.storage.local.get(['enabled', 'freq', 'type', 'id'], function(option) {
     } else { // first initialization
     	document.getElementById("type").firstChild.data = "Full Body";
     }
-	if (option.id != null) { // id is set when logged in, null otherwise
-		if (option.type != null) {
+	if (option.pid != null) { // id is set when logged in, null otherwise		
 			document.getElementById("notification").style.display = "block";
 			document.getElementById("loginbtn").style.display = "none";
-		} 
+		
     } else { // first initialization or logged out
 		document.getElementById("notification").style.display = "none";
 		document.getElementById("loginbtn").style.display = "block";
@@ -98,8 +97,8 @@ document.getElementById("type").onclick = function(){
 
 document.getElementById("loginbtn").onclick = function(){
     console.log("Login button clicked");
-    chrome.storage.local.set({'id': "012"}, function() {
-		console.log("Set id to 0012");
+    chrome.storage.local.set({'pid': "12345"}, function() {
+		console.log("Set pid to 12345");
 	  });
 	chrome.storage.local.set({'group': 3}, function() {
 		console.log("Set group to 3");
@@ -118,8 +117,8 @@ document.getElementById("loginbtn").onclick = function(){
 };
 document.getElementById("logoutbtn").onclick = function(){
     console.log("Logout button clicked");
-    chrome.storage.local.set({'id': null}, function() {
-		console.log("Set id to null");
+    chrome.storage.local.set({'pid': null}, function() {
+		console.log("Set pid to null");
 	  });
 	chrome.storage.local.set({'group': null}, function() {
 		console.log("Set group to null");

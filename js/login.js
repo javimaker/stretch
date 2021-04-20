@@ -39,7 +39,8 @@ $(function() {
           pid: $("#pid").val(),
           pwd: $("#password").val(),         
         };
-        $.ajax({
+        
+        /*$.ajax({
           type: "POST",
           url: "https://us-east1-onyx-logic-308404.cloudfunctions.net/participantInfo",
           data: formData,
@@ -57,8 +58,31 @@ $(function() {
         }).done(function (data) {
           alert("Done executing");
         });
+
+        //alert(JSON.stringify(formData));
+        var url = "https://us-east1-onyx-logic-308404.cloudfunctions.net/flashPoll";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        
+        xhr.setRequestHeader("Content-Type", "application/json");
+        
+        xhr.onreadystatechange = function () {
+           if (xhr.readyState === 4) {
+              console.log(xhr.status);
+              console.log(xhr.responseText);
+           }};
+      
+        var data = `{    "pid": "12345",
+            "date_time": "2020-12-28T20:11:04Z",
+            "poll_answer": 13
+        }`;
+        
+        xhr.send(data);
+        */
               
         event.preventDefault();
         open(location, '_self').close();
       });
   });
+})
