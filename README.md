@@ -7,6 +7,7 @@
 - 0.5 Initial UI fixes
 - 0.6 Added login, more UI fixes
 - 0.7 Added video display feature
+- 0.8 Added Flashpolls and stretch queue from server
 
 #### Credits
 - Shreya Pandit

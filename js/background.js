@@ -53,6 +53,41 @@ function recreateAlarm() {
         if(options.group >= 1) { createAlarm(1); } 
     });
 }
+function checkStrech(){
+    chrome.storage.local.get(['pid'], function(result) {
+        var id = result.pid;
+        //If PID is null, go to login
+        if (result.pid != null) {
+
+            //Prepare payload
+            console.log("Checking for stretches with ID:", id);
+            var stretchData = {
+                pid: id,
+            };
+            console.log(JSON.stringify(stretchData));
+            //POST request
+            var url = "https://us-east1-onyx-logic-308404.cloudfunctions.net/stretchStatus";
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url);
+            
+            xhr.setRequestHeader("Content-Type", "application/json");
+            
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if(xhr.responseText=="true"){
+                        console.log("Stretch ready to display");
+                        openNotification();
+                    }
+                    else {
+                        console.log("No stretch on queue");
+                    };
+                };
+            };           
+            xhr.send(JSON.stringify(stretchData));
+        }
+    });  
+}
 // listen for time and open the notification if it meets correct conditions
 chrome.alarms.onAlarm.addListener(function(alarm) {
     chrome.storage.local.get('enabled', function(option) {
@@ -60,10 +95,10 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
             if (alarm.name === 'alarmStart' // make sure we're turning on the right alarm
                 && ((option.enabled != null && option.enabled) // if enabled, make sure it's enabled
                     || option.enabled == null))  { // or if we are initializing for the first time
-                openNotification();
+                checkStrech();
             }
         } else { // option.enabled == null
-            openNotification();
+            checkStretch();
             chrome.storage.local.set({'enabled': true}, function() {
               console.log("Enabled set to true.");
             });
