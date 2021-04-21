@@ -181,7 +181,7 @@ function displayExercise(selectedExercise) {
                 document.getElementById('image').append(image);
           }
         } else { //If I am group 1 (or null), I don't get any exercise and the refresh button is hidden
-            document.getElementById("new-exercise").style.display = "none";
+            document.getElementById("load-another").style.display = "none";
         }
     });
 }
