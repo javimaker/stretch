@@ -1,5 +1,5 @@
 // popup javascript
-chrome.storage.local.get(['enabled', 'freq', 'type', 'pid'], function(option) {
+chrome.storage.local.get(['enabled', 'freq', 'type', 'pid', 'group'], function(option) {
     if (option.enabled != null) { // enabled or disabled; for first initialization, enable
 		if (! option.enabled) { document.getElementById("checkbox1").checked = false; } 
 		else { document.getElementById("checkbox1").checked = true; }  	
@@ -30,13 +30,20 @@ chrome.storage.local.get(['enabled', 'freq', 'type', 'pid'], function(option) {
     } else { // first initialization
     	document.getElementById("type").firstChild.data = "Full Body";
     }
-	if (option.pid != null) { // id is set when logged in, null otherwise		
-			document.getElementById("notification").style.display = "block";
-			document.getElementById("loginbtn").style.display = "none";
+	if (option.pid != null) { // id is set when logged in, null otherwise
+		document.getElementById("pid-show").innerHTML = "Participant: " + option.pid;
+		document.getElementById("notification").style.display = "block";
+		document.getElementById("loginbtn").style.display = "none";
 		
     } else { // first initialization or logged out
 		document.getElementById("notification").style.display = "none";
 		document.getElementById("loginbtn").style.display = "block";
+    }
+	if (parseInt(option.group) > 1) { // if group 2 or 3, display option
+		document.getElementById("opt-area").style.display = "block";
+		
+    } else { // first initialization or logged out
+		document.getElementById("opt-area").style.display = "none";
     }
 });
 
@@ -96,16 +103,10 @@ document.getElementById("type").onclick = function(){
 };
 
 document.getElementById("loginbtn").onclick = function(){
-    console.log("Login button clicked");
-    chrome.storage.local.set({'pid': "12345"}, function() {
-		console.log("Set pid to 12345");
-	  });
-	chrome.storage.local.set({'group': 3}, function() {
-		console.log("Set group to 3");
-	});
-	document.getElementById("notification").style.display = "block";
-	document.getElementById("loginbtn").style.display = "none";
-	console.log("Calling openNotification in background.js.");
+    console.log("Login button clicked");	
+	//document.getElementById("notification").style.display = "block";
+	//document.getElementById("loginbtn").style.display = "none";
+
 	//Opens login page
     var popupUrl = chrome.runtime.getURL('/login.html');
     chrome.tabs.query({url:popupUrl}, function(tabs){
@@ -116,6 +117,7 @@ document.getElementById("loginbtn").onclick = function(){
     });
 };
 document.getElementById("logoutbtn").onclick = function(){
+	event.preventDefault();
     console.log("Logout button clicked");
     chrome.storage.local.set({'pid': null}, function() {
 		console.log("Set pid to null");
@@ -123,8 +125,9 @@ document.getElementById("logoutbtn").onclick = function(){
 	chrome.storage.local.set({'group': null}, function() {
 		console.log("Set group to null");
 	  });
-	document.getElementById("notification").style.display = "none";
-	document.getElementById("loginbtn").style.display = "block";
+	//document.getElementById("notification").style.display = "none";
+	//document.getElementById("loginbtn").style.display = "block";
+	document.location.reload(true);
 };
 
 document.getElementById("notification").onclick = function(){

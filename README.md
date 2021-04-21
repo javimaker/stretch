@@ -8,6 +8,7 @@
 - 0.6 Added login, more UI fixes
 - 0.7 Added video display feature
 - 0.8 Added Flashpolls and stretch queue from server
+- 0.9 Added login and bugfixes
 
 #### Credits
 - Shreya Pandit

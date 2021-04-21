@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "MIT STRETCH Study",
-  "version": "0.8.0",
-  "description": "Companion extension for the MIT STRETCH study",
+  "name": "MIT Zoom Break Study",
+  "version": "0.9",
+  "description": "Companion extension for the MIT Zoom Break Study. For selected participants only!",
   "icons": {"16": "logo/logo_16.png",
            "48": "logo/logo_48.png",
           "128": "logo/logo_128.png"
@@ -21,7 +21,7 @@
     "http://*.cloudfunctions.net/"
   ],
   "browser_action": {
-        "default_title": "MIT STRETCH! Study",
+        "default_title": "MIT Zoom Break Study",
         "default_popup": "popup.html"
     }
 }
