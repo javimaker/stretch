@@ -170,7 +170,8 @@ function displayExercise(selectedExercise) {
                 video.setAttribute("autoplay", "True");
                 //video.setAttribute("width", "100%");
                 video.setAttribute("height","360")
-                document.getElementById('image').append(video);       
+                document.getElementById('image').append(video);  
+                document.getElementById("group-1").style.display = "none"; //hide group 1 instructions     
             } else {
                 var imageURL = selectedExercise.images[0].urls.original;
                 var image = document.createElement('img');
@@ -179,6 +180,7 @@ function displayExercise(selectedExercise) {
                 image.setAttribute("max-width", "100%");
                 image.setAttribute("height", "auto");
                 document.getElementById('image').append(image);
+                document.getElementById("group-1").style.display = "none"; //hide group 1 instructions
           }
         } else { //If I am group 1 (or null), I don't get any exercise and the refresh button is hidden
             document.getElementById("load-another").style.display = "none";
