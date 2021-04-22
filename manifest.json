@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "MIT Zoom Break Study",
-  "version": "0.9",
+  "version": "1.0",
   "description": "Companion extension for the MIT Zoom Break Study. For selected participants only!",
   "icons": {"16": "logo/logo_16.png",
            "48": "logo/logo_48.png",
