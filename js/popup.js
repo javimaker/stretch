@@ -55,6 +55,8 @@ document.getElementById("checkbox1").onclick = function(){
 	} else { // currently says disable
 		chrome.storage.local.set({'enabled': true}, function() {
 	      console.log("Enabled set to true.");
+		  //Recreate alarm
+		  chrome.runtime.sendMessage({ msg: "startFunc" });
 	    });
 	}
 };

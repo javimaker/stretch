@@ -28,6 +28,8 @@ document.getElementById("login-btn").onclick = function() {
             chrome.storage.local.set({'enabled': true}, function() {
               console.log("Set enabled to true");
             });
+            //Force recreate alarm
+            chrome.runtime.sendMessage({ msg: "startFunc" });
             //And close
             open(location, '_self').close();
           }

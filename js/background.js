@@ -88,6 +88,12 @@ function checkStrech(){
         }
     });  
 }
+
+var callRecreate = function(){
+    recreateAlarm();
+    console.log("Alarm recreated from internal msg")
+};
+
 // listen for time and open the notification if it meets correct conditions
 chrome.alarms.onAlarm.addListener(function(alarm) {
     chrome.storage.local.get('enabled', function(option) {
@@ -105,3 +111,9 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
         }
     });   
 });
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse){
+        if(request.msg == "startFunc") callRecreate();
+    }
+);

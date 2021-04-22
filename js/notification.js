@@ -80,7 +80,7 @@ function grabAndDisplayExercise() {
     var results;
     chrome.storage.local.get('type', function(data) {
         var type;
-        if (data.type == null) { type = "upperbody"; }
+        if (data.type == null) { type = "fullbody"; }
         else { type = data.type; }
         if (type == "upperbody") {
             chrome.storage.local.get("upperbodyresults", function(data) {
