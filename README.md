@@ -9,6 +9,7 @@
 - 0.7 Added video display feature
 - 0.8 Added Flashpolls and stretch queue from server
 - 0.9 Added login and bugfixes
+- 1.0 RC2 Cosmetic fixes and login enhancement
 
 #### Credits
 - Shreya Pandit
