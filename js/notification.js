@@ -37,6 +37,11 @@ chrome.storage.local.get('exercisesLastSaved', function(date) {
         event.preventDefault(); 
         //open(location, '_self').close();	
         };
+    document.getElementById("poll-btn-4").onclick = function(){
+        sendPoll(4);
+        event.preventDefault(); 
+        //open(location, '_self').close();  
+        };
 });
 
 function queryAllAPIs(callback) {
@@ -182,7 +187,7 @@ function displayExercise(selectedExercise) {
                 document.getElementById('image').append(image);
                 document.getElementById("group-1").style.display = "none"; //hide group 1 instructions
           }
-        } else { //If I am group 1 (or null), I don't get any exercise and the refresh button is hidden
+        } else { //If I am group 1 (or null), hide 
             document.getElementById("load-another").style.display = "none";
         }
     });
@@ -207,13 +212,13 @@ function sendPoll(pollchoice){
             var dateTime = new Date().toLocaleString();
 
             //Prepare payload
-            console.log("Sending flashpoll with ID:", id);
+            //console.log("Sending flashpoll with ID:", id);
             var pollData = {
                 pid: id,
                 date_time: dateTime,
                 poll_answer: pollchoice, 
             };
-            console.log(JSON.stringify(pollData));
+            //console.log(JSON.stringify(pollData));
             //POST request
             var url = "https://us-east1-onyx-logic-308404.cloudfunctions.net/flashPoll";
 

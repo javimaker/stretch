@@ -36,7 +36,7 @@ document.getElementById("login-btn").onclick = function() {
         } else {
           pid.value = "";
           pwd.value = "";
-          alert("Login error");
+          //alert("Login error");
         };
         }};
 
